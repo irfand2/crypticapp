@@ -8,6 +8,7 @@
 namespace myapp {
 
 using cinder::app::KeyEvent;
+using cinder::app::MouseEvent;
 using cinder::Rectf;
 using cinder::vec2;
 using cinder::Color;
@@ -27,18 +28,16 @@ vec2 kCenter;
 MyApp::MyApp() { }
 
 void MyApp::setup() {
-  /*
-   anan = vec2(0,100);
-  baban = vec2(0, 100);
-  //vec2 amk = getWindowP
-  rectangle = Rectf(anan, baban);
-  color = Color(1, 0, 0);
-  rec = Rectf(getWindowPosX(), getWindowPosY(), getWindowPosX() + 50, getWindowPosY()+ 50);
-   */
-  //c = getWindowCenter();
+
+  inMainScreen = true;
+  inEncryptScreen = false;
+  inDecryptScreen = false;
+
   vec2 kCenter = cinder::app::getWindowCenter();
+
   encrypt_button = Rectf(kCenter.x - 250, kCenter.y + 50, kCenter.x + 250, kCenter.y + 200);
   encrypt_color = Color(0,1,0);
+
   decrypt_button = Rectf(kCenter.x - 250, kCenter.y-200, kCenter.x + 250, kCenter.y-50);
   decrypt_color = Color(1,0,0);
 
@@ -48,6 +47,32 @@ void MyApp::setup() {
 void MyApp::update() { }
 
 void MyApp::draw() {
+  if (inMainScreen) {
+    DrawMainScreen();
+  } else if (inEncryptScreen) {
+    DrawEncryptScreen();
+  } else if (inDecryptScreen) {
+    DrawDecryptScreen();
+  }
+}
+
+void MyApp::keyDown(KeyEvent event) { }
+
+void MyApp::mouseDown(MouseEvent event)  {
+  if (event.isLeft() && event.getX() > kCenter.x - 250 && event.getX() < kCenter.x + 250) {
+    if (event.getY() > kCenter.y + 50 && event.getY() < kCenter.y + 200) {
+      inMainScreen = false;
+      inEncryptScreen = true;
+      inDecryptScreen = false;
+    } else if (event.getY() > kCenter.y - 200 && event.getY() < kCenter.y - 50) {
+      inMainScreen = false;
+      inEncryptScreen = false;
+      inDecryptScreen = true;
+    }
+  }
+}
+
+void MyApp::DrawMainScreen() {
   cinder::gl::clear();
 
   cinder::gl::color(encrypt_color);
@@ -64,6 +89,12 @@ void MyApp::draw() {
 
 }
 
-void MyApp::keyDown(KeyEvent event) { }
+void MyApp::DrawEncryptScreen() {
+  cinder::gl::clear();
+}
+
+void MyApp::DrawDecryptScreen() {
+  cinder::gl::clear();
+}
 
 }  // namespace myapp

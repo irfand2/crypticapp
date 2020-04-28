@@ -15,9 +15,18 @@ class MyApp : public cinder::app::App {
   void update() override;
   void draw() override;
   void keyDown(cinder::app::KeyEvent) override;
+  void mouseDown(cinder::app::MouseEvent) override;
+ private:
+  void DrawMainScreen();
+  void DrawEncryptScreen();
+  void DrawDecryptScreen();
  private:
   const std::string encrypt_button_text = "ENCRYPT";
   const std::string decrypt_button_text = "DECRYPT";
+
+  bool inMainScreen;
+  bool inEncryptScreen;
+  bool inDecryptScreen;
 };
 
 }  // namespace myapp
