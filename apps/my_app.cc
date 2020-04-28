@@ -59,7 +59,7 @@ void MyApp::draw() {
 void MyApp::keyDown(KeyEvent event) { }
 
 void MyApp::mouseDown(MouseEvent event)  {
-  if (event.isLeft() && event.getX() > kCenter.x - 250 && event.getX() < kCenter.x + 250) {
+  if (event.isLeft() && event.getX() > kCenter.x - 250 && event.getX() < kCenter.x + 450) {
     if (event.getY() > kCenter.y + 50 && event.getY() < kCenter.y + 200) {
       inMainScreen = false;
       inEncryptScreen = true;
