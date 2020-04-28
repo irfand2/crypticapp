@@ -7,11 +7,12 @@
 
  - **4/21/2020**
    - Fixed issues regarding the cinder block.
-   - Added a SHA1 hashing using the library.
+   - Added SHA1 hashing using the cinder block.
    - Wrote some simple tests for the encryption methods.
  
  - **4/27/2020**
    - Added two rectangles that will act as buttons.
+ 
  - **4/28/2020**
    - Added text inside the rectangles.
    - Made rectangles clickable.   

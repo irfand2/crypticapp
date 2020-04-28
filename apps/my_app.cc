@@ -21,7 +21,6 @@ Color encrypt_color;
 Color decrypt_color;
 Color button_text_color;
 
-
 vec2 kCenter;
 
 
@@ -60,11 +59,11 @@ void MyApp::keyDown(KeyEvent event) { }
 
 void MyApp::mouseDown(MouseEvent event)  {
   if (event.isLeft() && event.getX() > kCenter.x - 250 && event.getX() < kCenter.x + 450) {
-    if (event.getY() > kCenter.y + 50 && event.getY() < kCenter.y + 200) {
+    if (event.getY() > kCenter.y && event.getY() < kCenter.y + 200) {
       inMainScreen = false;
       inEncryptScreen = true;
       inDecryptScreen = false;
-    } else if (event.getY() > kCenter.y - 200 && event.getY() < kCenter.y - 50) {
+    } else if (event.getY() > kCenter.y - 250 && event.getY() < kCenter.y - 50) {
       inMainScreen = false;
       inEncryptScreen = false;
       inDecryptScreen = true;
@@ -82,15 +81,24 @@ void MyApp::DrawMainScreen() {
   cinder::gl::drawSolidRect(decrypt_button);
 
   vec2 encrypt_text_pos = vec2(kCenter.x + 400, kCenter.y + 250);
-  cinder::gl::drawStringCentered(encrypt_button_text, encrypt_text_pos, button_text_color, cinder::Font("Arial", 60));
+  cinder::gl::drawStringCentered(kEncryptButtonText, encrypt_text_pos, button_text_color, cinder::Font("Arial", 60));
 
   vec2 decrypt_text_pos = vec2(kCenter.x + 400, kCenter.y + 500);
-  cinder::gl::drawStringCentered(decrypt_button_text, decrypt_text_pos, button_text_color, cinder::Font("Arial", 60));
+  cinder::gl::drawStringCentered(kDecryptButtonText, decrypt_text_pos, button_text_color, cinder::Font("Arial", 60));
 
 }
 
 void MyApp::DrawEncryptScreen() {
   cinder::gl::clear();
+
+  vec2 anan = vec2(kCenter.x + 400, kCenter.y + 150);
+  cinder::gl::drawStringCentered(kEncryptInfoText, anan, button_text_color, cinder::Font("Arial", 60));
+
+  vec2 baban = vec2(kCenter.x + 400, kCenter.y + 400);
+  cinder::gl::drawStringCentered(kEncryptKeyText, baban, button_text_color, cinder::Font("Arial", 60));
+
+  vec2 bacin = vec2(kCenter.x + 400, kCenter.y + 650);
+  cinder::gl::drawStringCentered(kEncryptChoicesText, bacin, button_text_color, cinder::Font("Arial", 60));
 }
 
 void MyApp::DrawDecryptScreen() {
