@@ -15,6 +15,9 @@ class MyApp : public cinder::app::App {
   void update() override;
   void draw() override;
   void keyDown(cinder::app::KeyEvent) override;
+ private:
+  const std::string encrypt_button_text = "ENCRYPT";
+  const std::string decrypt_button_text = "DECRYPT";
 };
 
 }  // namespace myapp
