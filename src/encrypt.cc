@@ -13,6 +13,9 @@ namespace mylibrary {
 const string kCharacters = " !\"#$%&'()*+,-./0123456789:;<=>?@ABCDEFGHIJKLMNOPQRSTUVWXYZ[\\]^_`abcdefghijklmnopqrstuvwxyz{|}~";
 
 string CeasarChipper(string input, int key) {
+  if (input.size() == 0) {
+    return input;
+  }
   int shift = key % input.size();
   if (shift == 0) {
     return input;
@@ -29,6 +32,9 @@ string CeasarChipper(string input, int key) {
 }
 
 string XOR(string input, int key) {
+  if (input.size() == 0) {
+    return input;
+  }
   // iterate and use ^ operator to xor all chars
   for (int i = 0; i < input.size(); i++) {
     input[i] = input[i] ^ key;
@@ -37,6 +43,9 @@ string XOR(string input, int key) {
 }
 
 string SHA1(string input) {
+  if (input.size() == 0) {
+    return input;
+  }
   // use Cinder-SHA1 library to hash the string
   warp::SHA1 anan;
   anan.update(input);
@@ -45,6 +54,9 @@ string SHA1(string input) {
 }
 
 string DecryptCeasar(string input, int key) {
+  if (input.size() == 0) {
+    return input;
+  }
   int shift = (-1 * key) % input.size();
   if (shift == 0) {
     return input;
@@ -61,6 +73,9 @@ string DecryptCeasar(string input, int key) {
 }
 
 string DecryptXOR(string input, int key) {
+  if (input.size() == 0) {
+    return input;
+  }
   // calling XOR a second time with same values reverses encryption
   return XOR(input, key);
 }

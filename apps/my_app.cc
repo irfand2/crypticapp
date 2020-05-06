@@ -9,15 +9,6 @@
 namespace myapp {
 
 using cinder::app::KeyEvent;
-using cinder::app::MouseEvent;
-using cinder::Rectf;
-using cinder::vec2;
-using cinder::Color;
-using cinder::TextBox;
-
-//using namespace mylibrary;
-
-
 
 MyApp::MyApp() { }
 
@@ -43,9 +34,6 @@ void MyApp::draw() {
 }
 
 void MyApp::keyDown(KeyEvent event) { }
-
-void MyApp::mouseDown(MouseEvent event)  {
-}
 
 void MyApp::DrawMainScreen() {
   cinder::gl::clear();
@@ -76,30 +64,51 @@ void MyApp::DrawEncryptScreen() {
   ImGui::InputTextMultiline("Enter your text below:", &message);
   static int key = 0;
   ImGui::InputInt("Enter your key here:", &key);
-  static std::string encrypted_text;
-  if (ceasar_box) {
-    encrypted_text = mylibrary::CeasarChipper(message, key);
-  } else if (xor_box) {
-    encrypted_text = mylibrary::XOR(message, key);
-  } else if (sha_box) {
-    encrypted_text = mylibrary::SHA1(message);
+  static std::string encrypted_text = "";
+  static bool shouldEncrypt = false;
+  ui::Checkbox("ENCRYPT", &shouldEncrypt);
+  if (shouldEncrypt) {
+    if (ceasar_box) {
+      encrypted_text = mylibrary::CeasarChipper(message, key);
+    } else if (xor_box) {
+      encrypted_text = mylibrary::XOR(message, key);
+    } else if (sha_box) {
+      encrypted_text = mylibrary::SHA1(message);
+    }
+    ui::Text(encrypted_text.c_str());
   }
-  //ui::Text(&encrypted_text);
-  /*
-  vec2 anan = vec2(kCenter.x + 400, kCenter.y + 150);
-  cinder::gl::drawStringCentered(kEncryptInfoText, anan, button_text_color, cinder::Font("Arial", 60));
-
-  vec2 baban = vec2(kCenter.x + 400, kCenter.y + 400);
-  cinder::gl::drawStringCentered(kEncryptKeyText, baban, button_text_color, cinder::Font("Arial", 60));
-
-  vec2 bacin = vec2(kCenter.x + 400, kCenter.y + 650);
-  cinder::gl::drawStringCentered(kEncryptChoicesText, bacin, button_text_color, cinder::Font("Arial", 60));
-  */
+  if (ui::Button("GO BACK")) {
+    inEncryptScreen = false;
+    inMainScreen = true;
+  }
 }
 
 void MyApp::DrawDecryptScreen() {
   cinder::gl::clear();
   ui::Text("Choose your desired decryption method:");
+  static bool ceasar_box = false;
+  static bool xor_box = false;
+  ui::Checkbox("Ceasar Chipper", &ceasar_box);
+  ui::Checkbox("XOR Chipper", &xor_box);
+  static std::string message;
+  ImGui::InputTextMultiline("Enter your text below:", &message);
+  static int key = 0;
+  ImGui::InputInt("Enter your key here:", &key);
+  static std::string decrypted_text = "";
+  static bool shouldDecrypt = false;
+  ui::Checkbox("DECRYPT", &shouldDecrypt);
+  if (shouldDecrypt) {
+    if (ceasar_box) {
+      decrypted_text = mylibrary::DecryptCeasar(message, key);
+    } else if (xor_box) {
+      decrypted_text = mylibrary::DecryptXOR(message, key);
+    }
+    ui::Text(decrypted_text.c_str());
+  }
+  if (ui::Button("GO BACK")) {
+    inDecryptScreen = false;
+    inMainScreen = true;
+  }
 }
 
 }  // namespace myapp

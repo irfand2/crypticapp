@@ -15,26 +15,11 @@ class MyApp : public cinder::app::App {
   void update() override;
   void draw() override;
   void keyDown(cinder::app::KeyEvent) override;
-  void mouseDown(cinder::app::MouseEvent) override;
  private:
   void DrawMainScreen();
   void DrawEncryptScreen();
   void DrawDecryptScreen();
  private:
-
-  const std::string kEncryptButtonLabel = "ENCRYPT";
-  const std::string kDecryptButtonLabel = "DECRYPT";
-
-  const std::string kEncryptButtonText = "ENCRYPT";
-  const std::string kDecryptButtonText = "DECRYPT";
-
-  const std::string kEncryptInfoText = "Enter your text here:";
-  const std::string kEncryptKeyText = "Enter your key here:";
-  const std::string kEncryptChoicesText = "Choose an encryption method";
-
-  const std::string kDecryptInfoText = "Enter your chipped text here:";
-  const std::string kDecryptKeyText = "Enter the key of encryption here:";
-
   bool inMainScreen;
   bool inEncryptScreen;
   bool inDecryptScreen;

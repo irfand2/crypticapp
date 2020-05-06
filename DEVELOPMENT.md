@@ -23,5 +23,6 @@
  
  - **5/06/2020**
    - Deleted the manually created buttons and texts.
-   - Recreated the user interface using ImGui.
+   - Recreated the user interface using ImGui:
+   - Finished encrypt and decrypt screens.
       
