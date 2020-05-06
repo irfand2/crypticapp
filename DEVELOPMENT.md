@@ -15,5 +15,7 @@
  
  - **4/28/2020**
    - Added text inside the rectangles.
-   - Made rectangles clickable.   
+   - Made rectangles clickable.  
  
+ - **5/01/2020**
+   - Added decryption methods for Ceasar and XOR. 

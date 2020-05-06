@@ -15,6 +15,12 @@ void CeasarChipper(string& input, int key);
 void XOR(string& input, int key);
 // Hashes the input using SHA1 algortihm.
 void SHA1(string& input);
+// Decrypts strings encrypted with Ceasar.
+void DecryptCeasar(string& input, int key);
+// Decrypts strings encrypted with XOR.
+void DecryptXOR(string& input, int key);
+
+// Hashing is one-way, so no decryption for SHA1.
 
 }  // namespace mylibrary
 

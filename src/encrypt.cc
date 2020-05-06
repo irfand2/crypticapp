@@ -41,4 +41,24 @@ void SHA1(string& input) {
   input = anan.final();
 }
 
+void DecryptCeasar(string& input, int key) {
+  int shift = key % input.size();
+  if (shift == 0) {
+    return;
+  }
+  // iterate through the string and shift the letters
+  for (int i = 0; i < input.size(); i++) {
+    // find the index of the character
+    int index = kCharacters.find(input[i]);
+    // perform the shift
+    index = index - shift;
+    input[i] = kCharacters[index];
+  }
+}
+
+void DecryptXOR(string& input, int key) {
+  // calling XOR a second time with same values reverses encryption
+  XOR(input, key);
+}
+
 }  // namespace mylibrary
