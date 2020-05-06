@@ -21,6 +21,10 @@ class MyApp : public cinder::app::App {
   void DrawEncryptScreen();
   void DrawDecryptScreen();
  private:
+
+  const std::string kEncryptButtonLabel = "ENCRYPT";
+  const std::string kDecryptButtonLabel = "DECRYPT";
+
   const std::string kEncryptButtonText = "ENCRYPT";
   const std::string kDecryptButtonText = "DECRYPT";
 

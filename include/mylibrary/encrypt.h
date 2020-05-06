@@ -10,15 +10,15 @@ using namespace std;
 namespace mylibrary {
 
 // Basic ceasar chipper that shifts the letters in a string by the given key.
-void CeasarChipper(string& input, int key);
+string CeasarChipper(string input, int key);
 // Standard XOR encryption.
-void XOR(string& input, int key);
+string XOR(string input, int key);
 // Hashes the input using SHA1 algortihm.
-void SHA1(string& input);
+string SHA1(string input);
 // Decrypts strings encrypted with Ceasar.
-void DecryptCeasar(string& input, int key);
+string DecryptCeasar(string input, int key);
 // Decrypts strings encrypted with XOR.
-void DecryptXOR(string& input, int key);
+string DecryptXOR(string input, int key);
 
 // Hashing is one-way, so no decryption for SHA1.
 

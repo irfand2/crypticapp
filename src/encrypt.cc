@@ -12,10 +12,10 @@ namespace mylibrary {
 
 const string kCharacters = " !\"#$%&'()*+,-./0123456789:;<=>?@ABCDEFGHIJKLMNOPQRSTUVWXYZ[\\]^_`abcdefghijklmnopqrstuvwxyz{|}~";
 
-void CeasarChipper(string& input, int key) {
+string CeasarChipper(string input, int key) {
   int shift = key % input.size();
   if (shift == 0) {
-    return;
+    return input;
   }
   // iterate through the string and shift the letters
   for (int i = 0; i < input.size(); i++) {
@@ -25,40 +25,44 @@ void CeasarChipper(string& input, int key) {
     index += shift;
     input[i] = kCharacters[index];
   }
+  return input;
 }
 
-void XOR(string& input, int key) {
+string XOR(string input, int key) {
   // iterate and use ^ operator to xor all chars
   for (int i = 0; i < input.size(); i++) {
     input[i] = input[i] ^ key;
   }
+  return input;
 }
 
-void SHA1(string& input) {
+string SHA1(string input) {
   // use Cinder-SHA1 library to hash the string
   warp::SHA1 anan;
   anan.update(input);
   input = anan.final();
+  return input;
 }
 
-void DecryptCeasar(string& input, int key) {
-  int shift = key % input.size();
+string DecryptCeasar(string input, int key) {
+  int shift = (-1 * key) % input.size();
   if (shift == 0) {
-    return;
+    return input;
   }
   // iterate through the string and shift the letters
   for (int i = 0; i < input.size(); i++) {
     // find the index of the character
     int index = kCharacters.find(input[i]);
     // perform the shift
-    index = index - shift;
+    index = index + shift;
     input[i] = kCharacters[index];
   }
+  return input;
 }
 
-void DecryptXOR(string& input, int key) {
+string DecryptXOR(string input, int key) {
   // calling XOR a second time with same values reverses encryption
-  XOR(input, key);
+  return XOR(input, key);
 }
 
 }  // namespace mylibrary

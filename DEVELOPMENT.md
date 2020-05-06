@@ -18,4 +18,10 @@
    - Made rectangles clickable.  
  
  - **5/01/2020**
-   - Added decryption methods for Ceasar and XOR. 
+   - Added decryption methods for Ceasar and XOR.
+   - Added Cinder-ImGui cinder block.
+ 
+ - **5/06/2020**
+   - Deleted the manually created buttons and texts.
+   - Recreated the user interface using ImGui.
+      

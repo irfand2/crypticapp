@@ -3,7 +3,8 @@
 #include "my_app.h"
 
 #include <cinder/app/App.h>
-
+#include "CinderImGui.h"
+#include <mylibrary/encrypt.h>
 
 namespace myapp {
 
@@ -14,33 +15,19 @@ using cinder::vec2;
 using cinder::Color;
 using cinder::TextBox;
 
+//using namespace mylibrary;
 
-Rectf encrypt_button;
-Rectf decrypt_button;
-Color encrypt_color;
-Color decrypt_color;
-Color button_text_color;
-
-vec2 kCenter;
 
 
 MyApp::MyApp() { }
 
 void MyApp::setup() {
+  ImGui::initialize();
 
   inMainScreen = true;
   inEncryptScreen = false;
   inDecryptScreen = false;
 
-  vec2 kCenter = cinder::app::getWindowCenter();
-
-  encrypt_button = Rectf(kCenter.x - 250, kCenter.y + 50, kCenter.x + 250, kCenter.y + 200);
-  encrypt_color = Color(0,1,0);
-
-  decrypt_button = Rectf(kCenter.x - 250, kCenter.y-200, kCenter.x + 250, kCenter.y-50);
-  decrypt_color = Color(1,0,0);
-
-  button_text_color = Color(0,0,1);
 }
 
 void MyApp::update() { }
@@ -58,39 +45,47 @@ void MyApp::draw() {
 void MyApp::keyDown(KeyEvent event) { }
 
 void MyApp::mouseDown(MouseEvent event)  {
-  if (event.isLeft() && event.getX() > kCenter.x - 250 && event.getX() < kCenter.x + 450) {
-    if (event.getY() > kCenter.y && event.getY() < kCenter.y + 200) {
-      inMainScreen = false;
-      inEncryptScreen = true;
-      inDecryptScreen = false;
-    } else if (event.getY() > kCenter.y - 250 && event.getY() < kCenter.y - 50) {
-      inMainScreen = false;
-      inEncryptScreen = false;
-      inDecryptScreen = true;
-    }
-  }
 }
 
 void MyApp::DrawMainScreen() {
   cinder::gl::clear();
-
-  cinder::gl::color(encrypt_color);
-  cinder::gl::drawSolidRect(encrypt_button);
-
-  cinder::gl::color(decrypt_color);
-  cinder::gl::drawSolidRect(decrypt_button);
-
-  vec2 encrypt_text_pos = vec2(kCenter.x + 400, kCenter.y + 250);
-  cinder::gl::drawStringCentered(kEncryptButtonText, encrypt_text_pos, button_text_color, cinder::Font("Arial", 60));
-
-  vec2 decrypt_text_pos = vec2(kCenter.x + 400, kCenter.y + 500);
-  cinder::gl::drawStringCentered(kDecryptButtonText, decrypt_text_pos, button_text_color, cinder::Font("Arial", 60));
+  ui::Text("Welcome to the Cryptic App!\nWith this app, you can encrypt your texts using:\n"
+           "Ceasar Chipping, XOR Encryption, or SHA1 hashing.\nYou can also decrypt texts that"
+           "are encrypted with Ceasar and XOR!\n\n\nClick on your desired operation:");
+  if (ui::Button("encrypt")) {
+    inMainScreen = false;
+    inEncryptScreen = true;
+  }
+  if (ui::Button("decrypt")) {
+    inMainScreen = false;
+    inDecryptScreen = true;
+  }
 
 }
 
 void MyApp::DrawEncryptScreen() {
   cinder::gl::clear();
-
+  ui::Text("Choose your desired encryption method:");
+  static bool ceasar_box = false;
+  static bool xor_box = false;
+  static bool sha_box = false;
+  ui::Checkbox("Ceasar Chipper", &ceasar_box);
+  ui::Checkbox("XOR Chipper", &xor_box);
+  ui::Checkbox("SHA1 Hashing", &sha_box);
+  static std::string message;
+  ImGui::InputTextMultiline("Enter your text below:", &message);
+  static int key = 0;
+  ImGui::InputInt("Enter your key here:", &key);
+  static std::string encrypted_text;
+  if (ceasar_box) {
+    encrypted_text = mylibrary::CeasarChipper(message, key);
+  } else if (xor_box) {
+    encrypted_text = mylibrary::XOR(message, key);
+  } else if (sha_box) {
+    encrypted_text = mylibrary::SHA1(message);
+  }
+  //ui::Text(&encrypted_text);
+  /*
   vec2 anan = vec2(kCenter.x + 400, kCenter.y + 150);
   cinder::gl::drawStringCentered(kEncryptInfoText, anan, button_text_color, cinder::Font("Arial", 60));
 
@@ -99,10 +94,12 @@ void MyApp::DrawEncryptScreen() {
 
   vec2 bacin = vec2(kCenter.x + 400, kCenter.y + 650);
   cinder::gl::drawStringCentered(kEncryptChoicesText, bacin, button_text_color, cinder::Font("Arial", 60));
+  */
 }
 
 void MyApp::DrawDecryptScreen() {
   cinder::gl::clear();
+  ui::Text("Choose your desired decryption method:");
 }
 
 }  // namespace myapp
