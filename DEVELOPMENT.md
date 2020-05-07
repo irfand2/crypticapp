@@ -26,5 +26,5 @@
    - Recreated the user interface using ImGui:
    - Finished encrypt and decrypt screens.
    - Added comments to my_app.cc.
-   
+   - Added more comprehensive tests.
       

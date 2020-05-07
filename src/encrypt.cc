@@ -14,7 +14,7 @@ const string kCharacters = " !\"#$%&'()*+,-./0123456789:;<=>?@ABCDEFGHIJKLMNO"
                            "PQRSTUVWXYZ[\\]^_`abcdefghijklmnopqrstuvwxyz{|}~";
 
 string CeasarChipper(string input, int key) {
-  if (input.size() == 0) {
+  if (input.size() == 0 || key < 0) {
     return input;
   }
   int shift = key % input.size();
@@ -33,7 +33,7 @@ string CeasarChipper(string input, int key) {
 }
 
 string XOR(string input, int key) {
-  if (input.size() == 0) {
+  if (input.size() == 0 || key < 0) {
     return input;
   }
   // iterate and use ^ operator to xor all chars
@@ -55,10 +55,10 @@ string SHA1(string input) {
 }
 
 string DecryptCeasar(string input, int key) {
-  if (input.size() == 0) {
+  if (input.size() == 0 || key < 0) {
     return input;
   }
-  int shift = (-1 * key) % input.size();
+  int shift = key % input.size();
   if (shift == 0) {
     return input;
   }
@@ -67,14 +67,17 @@ string DecryptCeasar(string input, int key) {
     // find the index of the character
     int index = kCharacters.find(input[i]);
     // perform the shift
-    index = index + shift;
+    index = index - shift;
+    if (index < 0) {
+      index = index + kCharacters.size();
+    }
     input[i] = kCharacters[index];
   }
   return input;
 }
 
 string DecryptXOR(string input, int key) {
-  if (input.size() == 0) {
+  if (input.size() == 0 || key < 0) {
     return input;
   }
   // calling XOR a second time with same values reverses encryption
