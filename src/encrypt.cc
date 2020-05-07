@@ -10,7 +10,8 @@ using namespace std;
 
 namespace mylibrary {
 
-const string kCharacters = " !\"#$%&'()*+,-./0123456789:;<=>?@ABCDEFGHIJKLMNOPQRSTUVWXYZ[\\]^_`abcdefghijklmnopqrstuvwxyz{|}~";
+const string kCharacters = " !\"#$%&'()*+,-./0123456789:;<=>?@ABCDEFGHIJKLMNO"
+                           "PQRSTUVWXYZ[\\]^_`abcdefghijklmnopqrstuvwxyz{|}~";
 
 string CeasarChipper(string input, int key) {
   if (input.size() == 0) {
@@ -47,9 +48,9 @@ string SHA1(string input) {
     return input;
   }
   // use Cinder-SHA1 library to hash the string
-  warp::SHA1 anan;
-  anan.update(input);
-  input = anan.final();
+  warp::SHA1 sha_1;
+  sha_1.update(input);
+  input = sha_1.final();
   return input;
 }
 

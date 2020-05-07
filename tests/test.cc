@@ -4,8 +4,9 @@
 
 #include <cinder/Rand.h>
 #include <mylibrary/encrypt.h>
-
 #include <catch2/catch.hpp>
+
+using namespace mylibrary;
 
 TEST_CASE("Random sanity test", "[random]") {
   const float random = cinder::randFloat();
@@ -19,10 +20,38 @@ TEST_CASE("sha", "[random]") {
   REQUIRE(text == "abc");
 }
 
-TEST_CASE("ceasar", "[random]") {
-  string text = "abc";
-  mylibrary::CeasarChipper(text, 1);
-  REQUIRE(text == "bcd");
+TEST_CASE("simple ceasar", "[ceasar][encrypt][decrypt]") {
+
+  SECTION("encrypt") {
+    string input = "abc";
+    string output = "bce";
+    REQUIRE(input == CeasarChipper(input, 0));
+    REQUIRE(output == CeasarChipper(input, 1));
+  }
+
+  SECTION("decrypt") {
+    string input = "ced";
+    string output = "abc";
+    REQUIRE(input == DecryptCeasar(input, 0));
+    REQUIRE(output == DecryptCeasar(input, 2));
+  }
+}
+
+TEST_CASE("complex ceasar", "[ceasar][encrypt][decrypt][simple]") {
+
+  SECTION("encrypt") {
+    string input = "HellO World! 137";
+    string output = "bce";
+    REQUIRE(input == CeasarChipper(input, input.size()));
+    REQUIRE(output == CeasarChipper(input, 1));
+  }
+
+  SECTION("decrypt") {
+    string input = "ced";
+    string output = "abc";
+    REQUIRE(input == DecryptCeasar(input, input.size()));
+    REQUIRE(output == DecryptCeasar(input, 2));
+  }
 }
 
 TEST_CASE("XOR", "[random]") {

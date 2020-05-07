@@ -16,13 +16,15 @@ class MyApp : public cinder::app::App {
   void draw() override;
   void keyDown(cinder::app::KeyEvent) override;
  private:
+  // helpers to draw different screens, these are called in draw():
   void DrawMainScreen();
   void DrawEncryptScreen();
   void DrawDecryptScreen();
  private:
-  bool inMainScreen;
-  bool inEncryptScreen;
-  bool inDecryptScreen;
+  // to keep track of the screen the user is currently in:
+  bool in_main_screen;
+  bool in_encrypt_screen;
+  bool in_decrypt_screen;
 };
 
 }  // namespace myapp
