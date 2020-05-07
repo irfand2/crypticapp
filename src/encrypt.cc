@@ -17,7 +17,7 @@ string CeasarChipper(string input, int key) {
   if (input.size() == 0 || key < 0) {
     return input;
   }
-  int shift = key % input.size();
+  int shift = key % kCharacters.size();
   if (shift == 0) {
     return input;
   }
@@ -27,6 +27,7 @@ string CeasarChipper(string input, int key) {
     int index = kCharacters.find(input[i]);
     // perform the shift
     index += shift;
+    index = index % kCharacters.size();
     input[i] = kCharacters[index];
   }
   return input;
@@ -58,7 +59,7 @@ string DecryptCeasar(string input, int key) {
   if (input.size() == 0 || key < 0) {
     return input;
   }
-  int shift = key % input.size();
+  int shift = key % kCharacters.size();
   if (shift == 0) {
     return input;
   }

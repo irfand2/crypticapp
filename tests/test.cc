@@ -33,14 +33,12 @@ TEST_CASE("complex ceasar", "[ceasar][encrypt][decrypt]") {
   SECTION("encrypt") {
     string input = "HellO World! 137";
     string output = "IfmmP!Xpsme\"!248";
-    REQUIRE(input == CeasarChipper(input, input.size()));
     REQUIRE(output == CeasarChipper(input, 1));
   }
 
   SECTION("decrypt") {
     string input = "IfmmP!Xpsme\"!248";
     string output = "HellO World! 137";
-    REQUIRE(input == DecryptCeasar(input, input.size()));
     REQUIRE(output == DecryptCeasar(input, 1));
   }
 }

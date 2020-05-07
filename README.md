@@ -18,7 +18,7 @@ or crypto experts), ie. for those who don't need overly complex algorithms.
    - Cinder-SHA1 block (for SHA1 hashing)
    - Cinder-ImGui (for UI)
    
-**How to use this program: **
+**How to use this program:**
 
 Just start the program, choose encryption or decryption, enter your text and key,
 choose a method, and receive your encrypted/decrypted text!
