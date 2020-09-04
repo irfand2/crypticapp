@@ -50,6 +50,5 @@ https://en.wikipedia.org/wiki/Encryption
 
 **Author**: Irfan Demetoglu - [`irfand2@illinois.edu`](mailto:irfand2@illinois.edu)
 
-Read [this document](https://cliutils.gitlab.io/modern-cmake/chapters/basics/structure.html) to understand the project
-layout.
+
 
