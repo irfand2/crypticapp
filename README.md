@@ -6,7 +6,7 @@
 **Description**
 
 This is a simple cryptography project that provides 3 encryption methods:
-Ceasar Chipper, XOR, SHA1 hashing. Decryptors for Ceasar and XOR are also provided.
+Ceasar Cipher, XOR, SHA1 hashing. Decryptors for Ceasar and XOR are also provided.
 The UI is very simple, and thus the app is easy to use. This app is great for ordinary
 people who want to keep their files/texts from easy access by normal people (not hackers
 or crypto experts), ie. for those who don't need overly complex algorithms.
